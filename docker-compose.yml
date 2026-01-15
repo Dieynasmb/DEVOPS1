@@ -1,8 +1,6 @@
-version: "3.8"
-
 services:
   web:
-    image: devops1
+    build: .
     container_name: devops1-app
     ports:
       - "8081:80"
