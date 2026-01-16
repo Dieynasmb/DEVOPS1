@@ -20,17 +20,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -e
-
             echo "=== DEPLOY START ==="
             cd /home/ubuntu/DEVOPS1
-
-            echo "Pull latest code"
             git pull origin main
-
-            echo "Stopping containers"
             docker compose down || true
-
-            echo "Building and starting containers"
             docker compose up -d --build
-
             echo "=== DEPLOY END ==="
