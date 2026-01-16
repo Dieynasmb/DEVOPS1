@@ -19,7 +19,16 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            echo "=== DEPLOY START ==="
             cd ${{ secrets.EC2_APP_DIR }}
+
+            echo "Pull latest code"
             git pull origin main
-            docker-compose down
-            docker-compose up -d --build
+
+            echo "Stopping containers"
+            docker compose down
+
+            echo "Building & starting containers"
+            docker compose up -d --build
+
+            echo "=== DEPLOY END ==="
